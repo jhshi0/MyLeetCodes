@@ -1,0 +1,14 @@
+# Given a string, your task is to count how many palindromic substrings in this string.
+# The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+import numpy as np
+class Solution:
+    def countSubstrings(self, s: str, count_=int(0)) -> int:
+        len_=len(s)
+        dp=np.zeros(dtype=int, shape=(len_,len_))  
+        for difference in range(0, len_):
+            for L in range(0,len_-difference):
+                R = L+difference
+                if difference==0: dp[L][R]=1
+                elif difference==1 and s[L]==s[R]: dp[L][R]=1 
+                elif difference>=2 and s[L]==s[R]: dp[L][R]=dp[L+1][R-1]
+        return np.count_nonzero(a=dp)

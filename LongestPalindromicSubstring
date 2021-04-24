@@ -1,0 +1,27 @@
+# Given a string s, return the longest palindromic substring in s.
+class Solution:
+    def longestPalindrome(self, s: str, bag=[]) -> str: 
+        for it0 in range(0, len(s)): 
+            sub_=partition(X=s, len_=len(s)-it0)
+            for it1 in sub_:
+                if isPalindromic(X=it1):bag.append(it1)
+        return deleteRepeats(longest(X=bag))[0]
+def deleteRepeats(X:list)->list: 
+    return list(dict.fromkeys(X))
+def longest(X:str, len_=0, bag=[])->list: 
+    for it_ in X: 
+        if len_<len(it_):len_=len(it_) 
+    for it_ in X: 
+        if len(it_)==len_:bag.append(it_) 
+    return bag
+def partition(X:str, len_:int, bag=[])->list: 
+    for it_ in range(0,len(X)):
+        if len_==len(in_:=X[it_:it_+len_]):
+            bag.append(in_)
+    return bag
+def isPalindromic(X:str, ISEQUAL=1)->bool: 
+    while len(X)>1:
+        len_=len(X)
+        if X[0]!=X[len_-1]: ISEQUAL*=0  
+        X=X[1:len_-1]
+    return bool(ISEQUAL)
